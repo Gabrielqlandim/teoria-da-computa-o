@@ -1,3 +1,6 @@
+import time
+import random
+
 def mergeSort(inicio: int, fim: int, v: list[int], tam: int):
     if(inicio < fim):
         meio = (inicio+fim)//2
@@ -35,10 +38,12 @@ def intercala(inicio: int, meio:int, fim: int, v:list[int], tam: int):
         v[inicio + i] = aux[i]
 
 
-v = [38, 27, 43, 3, 9, 82, 10]
+v = [random.randint(1,100000) for _ in range(10000)]
 
 tam = len(v)
 
+tempo_inicial = time.time()
 mergeSort(0,tam-1,v,tam)
+tempo_final = time.time()
 
-print("Vetor ordenado: ", v)
+print("O tempo do merge sort foi de: ", tempo_final - tempo_inicial)
