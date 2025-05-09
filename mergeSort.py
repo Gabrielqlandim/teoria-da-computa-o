@@ -37,50 +37,69 @@ def intercala(inicio: int, meio:int, fim: int, v:list[int], tam: int):
     for i in range(pos_livre):
         v[inicio + i] = aux[i]
 
-tempos_execucao1 = []
-tempos_execucao2 = []
-tempos_execucao3 = []
+
+# para os vetores que tem tamanho 100
+tempos_melhor_100 = []
+tempos_pior_100 = []
+tempos_medio_100 = []
 
 for i in range(1000):
-    v = [random.randint(1,100000) for _ in range(1000)]
+    v1 = list(range(100))                    # melhor caso
+    v2 = list(range(100, 0, -1))             # pior caso
+    v3 = [random.randint(1,100000) for _ in range(100)]  # caso médio
 
-    tam = len(v)
+    for v, lista_tempos in [(v1, tempos_melhor_100), (v2, tempos_pior_100), (v3, tempos_medio_100)]:
+        tam = len(v)
+        tempo_inicial = time.time()
+        mergeSort(0,tam-1,v,tam)
+        tempo_final = time.time()
+        lista_tempos.append(tempo_final - tempo_inicial)
 
-    tempo_inicial = time.time()
-    mergeSort(0,tam-1,v,tam)
-    tempo_final = time.time()
 
-    tempo_execucao1 = tempo_final - tempo_inicial
-
-    tempos_execucao1.append(tempo_execucao1)
-
+# para os vetores que têm tamanho 1000
+tempos_melhor_1000 = []
+tempos_pior_1000 = []
+tempos_medio_1000 = []
 for i in range(1000):
-    v2 = [random.randint(1,100000) for _ in range(100)]
+    v1 = list(range(1000))                    # melhor caso
+    v2 = list(range(1000, 0, -1))             # pior caso
+    v3 = [random.randint(1,100000) for _ in range(1000)]  # caso médio
 
-    tam = len(v2)
+    for v, lista_tempos in [(v1, tempos_melhor_1000), (v2, tempos_pior_1000), (v3, tempos_medio_1000)]:
+        tam = len(v)
+        tempo_inicial = time.time()
+        mergeSort(0,tam-1,v,tam)
+        tempo_final = time.time()
+        lista_tempos.append(tempo_final-tempo_inicial)
 
-    tempo_inicial = time.time()
-    mergeSort(0,tam-1,v2,tam)
-    tempo_final = time.time()
-
-    tempo_execucao2 = tempo_final - tempo_inicial
-
-    tempos_execucao2.append(tempo_execucao2)
-
+# para os vetores que têm tamanho 10000
+tempos_melhor_10000 = []
+tempos_pior_10000 = []
+tempos_medio_10000 = []
 for i in range(1000):
-    v3 = [random.randint(1,100000) for _ in range(10000)]
+    v1 = list(range(10000))                    # melhor caso
+    v2 = list(range(10000, 0, -1))             # pior caso
+    v3 = [random.randint(1,100000) for _ in range(10000)]  # caso médio
 
-    tam = len(v3)
-
-    tempo_inicial = time.time()
-    mergeSort(0,tam-1,v3,tam)
-    tempo_final = time.time()
-
-    tempo_execucao3 = tempo_final - tempo_inicial
-
-    tempos_execucao3.append(tempo_execucao3)
+    for v, lista_tempos in [(v1, tempos_melhor_10000), (v2, tempos_pior_10000), (v3, tempos_medio_10000)]:
+        tam = len(v)
+        tempo_inicial = time.time()
+        mergeSort(0,tam-1,v,tam)
+        tempo_final = time.time()
+        lista_tempos.append(tempo_final - tempo_inicial)
 
 
-print("A média do tempo de execução do vetor com 1000 foi de: ", sum(tempos_execucao1)/1000)
-print("A média do tempo de execução do vetor com 100 foi de: ", sum(tempos_execucao2)/1000)
-print("A média do tempo de execução do vetor com 10000 foi de: ", sum(tempos_execucao3)/1000)
+print("\nTAMANHO 100")
+print("Média melhor caso:", sum(tempos_melhor_100)/10)
+print("Média pior caso:  ", sum(tempos_pior_100)/10)
+print("Média caso médio: ", sum(tempos_medio_100)/10)
+
+print("\nTAMANHO 1000")
+print("Média melhor caso:", sum(tempos_melhor_1000)/10)
+print("Média pior caso:  ", sum(tempos_pior_1000)/10)
+print("Média caso médio: ", sum(tempos_medio_1000)/10)
+
+print("\nTAMANHO 10000")
+print("Média melhor caso:", sum(tempos_melhor_10000)/10)
+print("Média pior caso:  ", sum(tempos_pior_10000)/10)
+print("Média caso médio: ", sum(tempos_medio_10000)/10)
