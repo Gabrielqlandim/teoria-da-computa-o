@@ -1,105 +1,64 @@
+import csv
 import time
 import random
 
-def mergeSort(inicio: int, fim: int, v: list[int], tam: int):
-    if(inicio < fim):
-        meio = (inicio+fim)//2
-        mergeSort(inicio, meio, v, tam)
-        mergeSort(meio+1, fim, v, tam)
-        intercala(inicio, meio, fim, v, tam)
-
-def intercala(inicio: int, meio:int, fim: int, v:list[int], tam: int):
+def intercala(inicio, meio, fim, v, tam):
     inicio_v1 = inicio
-    inicio_v2 = meio+1
+    inicio_v2 = meio + 1
     pos_livre = 0
     aux = [0] * tam
 
-    while(inicio_v1 <= meio and inicio_v2 <= fim):
-        if(v[inicio_v1] <= v[inicio_v2]):
+    while inicio_v1 <= meio and inicio_v2 <= fim:
+        if v[inicio_v1] <= v[inicio_v2]:
             aux[pos_livre] = v[inicio_v1]
-            pos_livre+=1
-            inicio_v1+=1
+            inicio_v1 += 1
         else:
             aux[pos_livre] = v[inicio_v2]
-            inicio_v2+=1
-            pos_livre+=1
-    
-    while(inicio_v1 <= meio):
+            inicio_v2 += 1
+        pos_livre += 1
+
+    while inicio_v1 <= meio:
         aux[pos_livre] = v[inicio_v1]
-        inicio_v1+=1
-        pos_livre+=1
-    
-    while(inicio_v2 <= fim):
+        inicio_v1 += 1
+        pos_livre += 1
+
+    while inicio_v2 <= fim:
         aux[pos_livre] = v[inicio_v2]
-        inicio_v2 +=1
-        pos_livre+=1
-    
+        inicio_v2 += 1
+        pos_livre += 1
+
     for i in range(pos_livre):
         v[inicio + i] = aux[i]
 
+def mergeSort(inicio, fim, v, tam):
+    if inicio < fim:
+        meio = (inicio + fim) // 2
+        mergeSort(inicio, meio, v, tam)
+        mergeSort(meio + 1, fim, v, tam)
+        intercala(inicio, meio, fim, v, tam)
 
-# para os vetores que tem tamanho 100
-tempos_melhor_100 = []
-tempos_pior_100 = []
-tempos_medio_100 = []
+def gerar_e_salvar_csv(nome_arquivo):
+    casos = {
+        "Melhor": lambda tam: list(range(tam)),
+        "Caso medio": lambda tam: [random.randint(1, 100000) for _ in range(tam)],
+        "Pior": lambda tam: list(range(tam, 0, -1))
+    }
 
-for i in range(1000):
-    v1 = list(range(100))                    # melhor caso
-    v2 = list(range(100, 0, -1))             # pior caso
-    v3 = [random.randint(1,100000) for _ in range(100)]  # caso médio
+    tamanhos = [100, 1000, 10000]
 
-    for v, lista_tempos in [(v1, tempos_melhor_100), (v2, tempos_pior_100), (v3, tempos_medio_100)]:
-        tam = len(v)
-        tempo_inicial = time.time()
-        mergeSort(0,tam-1,v,tam)
-        tempo_final = time.time()
-        lista_tempos.append(tempo_final - tempo_inicial)
+    with open(nome_arquivo, mode='w', newline='') as arquivo_csv:
+        escritor = csv.writer(arquivo_csv)
+        escritor.writerow(["Caso", "Tamanho", "Execucao", "Tempo"])
 
+        for tam in tamanhos:
+            for caso_nome, func in casos.items():
+                for execucao in range(1, 1001):
+                    v = func(tam)
+                    inicio = time.time()
+                    mergeSort(0, tam - 1, v, tam)
+                    fim = time.time()
+                    tempo = fim - inicio
+                    escritor.writerow([caso_nome, tam, execucao, tempo])
 
-# para os vetores que têm tamanho 1000
-tempos_melhor_1000 = []
-tempos_pior_1000 = []
-tempos_medio_1000 = []
-for i in range(1000):
-    v1 = list(range(1000))                    # melhor caso
-    v2 = list(range(1000, 0, -1))             # pior caso
-    v3 = [random.randint(1,100000) for _ in range(1000)]  # caso médio
-
-    for v, lista_tempos in [(v1, tempos_melhor_1000), (v2, tempos_pior_1000), (v3, tempos_medio_1000)]:
-        tam = len(v)
-        tempo_inicial = time.time()
-        mergeSort(0,tam-1,v,tam)
-        tempo_final = time.time()
-        lista_tempos.append(tempo_final-tempo_inicial)
-
-# para os vetores que têm tamanho 10000
-tempos_melhor_10000 = []
-tempos_pior_10000 = []
-tempos_medio_10000 = []
-for i in range(1000):
-    v1 = list(range(10000))                    # melhor caso
-    v2 = list(range(10000, 0, -1))             # pior caso
-    v3 = [random.randint(1,100000) for _ in range(10000)]  # caso médio
-
-    for v, lista_tempos in [(v1, tempos_melhor_10000), (v2, tempos_pior_10000), (v3, tempos_medio_10000)]:
-        tam = len(v)
-        tempo_inicial = time.time()
-        mergeSort(0,tam-1,v,tam)
-        tempo_final = time.time()
-        lista_tempos.append(tempo_final - tempo_inicial)
-
-
-print("\nTAMANHO 100")
-print("Média melhor caso:", sum(tempos_melhor_100)/10)
-print("Média pior caso:  ", sum(tempos_pior_100)/10)
-print("Média caso médio: ", sum(tempos_medio_100)/10)
-
-print("\nTAMANHO 1000")
-print("Média melhor caso:", sum(tempos_melhor_1000)/10)
-print("Média pior caso:  ", sum(tempos_pior_1000)/10)
-print("Média caso médio: ", sum(tempos_medio_1000)/10)
-
-print("\nTAMANHO 10000")
-print("Média melhor caso:", sum(tempos_melhor_10000)/10)
-print("Média pior caso:  ", sum(tempos_pior_10000)/10)
-print("Média caso médio: ", sum(tempos_medio_10000)/10)
+if __name__ == "__main__":
+    gerar_e_salvar_csv("tempos_python.csv")
