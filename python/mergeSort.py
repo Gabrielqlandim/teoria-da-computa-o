@@ -61,4 +61,4 @@ def gerar_e_salvar_csv(nome_arquivo):
                     escritor.writerow([caso_nome, tam, execucao, tempo])
 
 if __name__ == "__main__":
-    gerar_e_salvar_csv("tempos_python.csv")
+    gerar_e_salvar_csv("csv/tempos_python.csv")

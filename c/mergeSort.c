@@ -73,7 +73,7 @@ void executar(int tam, int caso, FILE *f){
 }
 
 int main(void){
-    FILE *f = fopen("tempos_c.csv", "w");
+    FILE *f = fopen("csv/tempos_c.csv", "w");
     if(f == NULL){
         printf("Erro ao abrir arquivo para escrita\n");
         return 1;

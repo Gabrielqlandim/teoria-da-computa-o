@@ -49,8 +49,8 @@ def plotar_por_linguagem(df, linguagem_nome, tamanhos=[100, 1000, 10000], casos=
 
 if __name__ == '__main__':
     # Carrega os arquivos de estatísticas gerados anteriormente
-    df_c = pd.read_csv('estatisticas_c.csv')
-    df_py = pd.read_csv('estatisticas_python.csv')
+    df_c = pd.read_csv('csv/estatisticas_c.csv')
+    df_py = pd.read_csv('csv/estatisticas_python.csv')
 
     # Gera os gráficos
     plotar_por_linguagem(df_c, 'C')
