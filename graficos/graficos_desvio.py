@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plotar_desvio_padrao(df, linguagem_nome, tamanhos=[100, 1000, 10000], casos=["Melhor", "Caso medio", "Pior"]):
+def plotar_desvio_padrao(df, linguagem_nome, tamanhos=[100, 10000, 100000], casos=["Melhor", "Caso medio", "Pior"]):
     x = np.arange(len(tamanhos))
     plt.figure(figsize=(12, 7))
 
@@ -35,8 +35,8 @@ def plotar_desvio_padrao(df, linguagem_nome, tamanhos=[100, 1000, 10000], casos=
     plt.show()
 
 if __name__ == '__main__':
-    df_c = pd.read_csv('csv/estatisticas_c.csv')
-    df_py = pd.read_csv('csv/estatisticas_python.csv')
+    df_c = pd.read_csv('estatisticas_c.csv')
+    df_py = pd.read_csv('estatisticas_python.csv')
 
     plotar_desvio_padrao(df_c, 'C')
     plotar_desvio_padrao(df_py, 'Python')

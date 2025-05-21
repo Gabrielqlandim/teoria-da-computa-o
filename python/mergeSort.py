@@ -44,7 +44,7 @@ def gerar_e_salvar_csv(nome_arquivo):
         "Pior": lambda tam: list(range(tam, 0, -1))
     }
 
-    tamanhos = [100, 1000, 10000]
+    tamanhos = [100, 10000, 100000]
 
     with open(nome_arquivo, mode='w', newline='') as arquivo_csv:
         escritor = csv.writer(arquivo_csv)
@@ -52,7 +52,7 @@ def gerar_e_salvar_csv(nome_arquivo):
 
         for tam in tamanhos:
             for caso_nome, func in casos.items():
-                for execucao in range(1, 1001):
+                for execucao in range(1, 16):
                     v = func(tam)
                     inicio = time.time()
                     mergeSort(0, tam - 1, v, tam)

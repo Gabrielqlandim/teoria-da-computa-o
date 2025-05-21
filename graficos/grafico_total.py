@@ -19,7 +19,7 @@ def calc_complexidade_teorica(tamanhos):
     return n_log_n_norm
 
 # Gerar gráfico agrupado para Melhor, Caso médio e Pior
-def plotar_casos_juntos(df_medias, linguagem_nome, tamanhos=[100, 1000, 10000], casos=["Melhor", "Caso medio", "Pior"]):
+def plotar_casos_juntos(df_medias, linguagem_nome, tamanhos=[100, 10000, 100000], casos=["Melhor", "Caso medio", "Pior"]):
     x = np.arange(len(tamanhos))
     n_casos = len(casos)
     largura = 0.8 / n_casos  # dividir o espaço das barras igualmente

@@ -19,7 +19,7 @@ def calc_complexidade_teorica(tamanhos):
     return n_log_n_norm
 
 # Função para gerar gráficos por linguagem
-def plotar_por_linguagem(df_medias, linguagem_nome, tamanhos=[100, 1000, 10000], casos=["Melhor", "Caso medio", "Pior"]):
+def plotar_por_linguagem(df_medias, linguagem_nome, tamanhos=[100, 10000, 100000], casos=["Melhor", "Caso medio", "Pior"]):
     complexidade_norm = calc_complexidade_teorica(tamanhos)
     max_tempo = df_medias['Tempo'].max()
     complexidade_teorica = complexidade_norm * max_tempo
