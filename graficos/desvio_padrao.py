@@ -19,5 +19,5 @@ def calcular_estatisticas(arquivo_csv, linguagem_nome, saida_csv):
 
 if __name__ == '__main__':
     # Executa para os dois arquivos
-    calcular_estatisticas('csv/tempos_c.csv', 'C', 'csv/estatisticas_c.csv')
-    calcular_estatisticas('csv/tempos_python.csv', 'Python', 'csv/estatisticas_python.csv')
+    calcular_estatisticas('tempos_c.csv', 'C', 'estatisticas_c.csv')
+    calcular_estatisticas('tempos_python.csv', 'Python', 'estatisticas_python.csv')

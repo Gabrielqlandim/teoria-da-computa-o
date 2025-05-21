@@ -46,8 +46,8 @@ def plotar_por_linguagem(df_medias, linguagem_nome, tamanhos=[100, 1000, 10000],
         plt.show()
 
 # Carregar os arquivos CSV
-df_c = carregar_dados('csv/tempos_c.csv', 'C')
-df_py = carregar_dados('csv/tempos_python.csv', 'Python')
+df_c = carregar_dados('tempos_c.csv', 'C')
+df_py = carregar_dados('tempos_python.csv', 'Python')
 
 # Calcular as médias por linguagem
 df_c_medias = calcular_medias(df_c)

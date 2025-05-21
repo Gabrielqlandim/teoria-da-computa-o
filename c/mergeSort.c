@@ -47,7 +47,9 @@ void executar(int tam, int caso, FILE *f){
                 v[i] = i;
             }
             else if (caso == 2){
-                v[i] = rand();
+                int min = 1;
+                int max = tam;
+                v[i] = min + rand() % (max - min + 1);
             }
             else if (caso == 3){
                 v[i] = tam - i;
@@ -73,7 +75,7 @@ void executar(int tam, int caso, FILE *f){
 }
 
 int main(void){
-    FILE *f = fopen("csv/tempos_c.csv", "w");
+    FILE *f = fopen("tempos_c.csv", "w");
     if(f == NULL){
         printf("Erro ao abrir arquivo para escrita\n");
         return 1;

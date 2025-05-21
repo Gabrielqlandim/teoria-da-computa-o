@@ -40,7 +40,7 @@ def mergeSort(inicio, fim, v, tam):
 def gerar_e_salvar_csv(nome_arquivo):
     casos = {
         "Melhor": lambda tam: list(range(tam)),
-        "Caso medio": lambda tam: [random.randint(1, 100000) for _ in range(tam)],
+        "Caso medio": lambda tam: [random.randint(1, tam) for _ in range(tam)],
         "Pior": lambda tam: list(range(tam, 0, -1))
     }
 
@@ -61,4 +61,4 @@ def gerar_e_salvar_csv(nome_arquivo):
                     escritor.writerow([caso_nome, tam, execucao, tempo])
 
 if __name__ == "__main__":
-    gerar_e_salvar_csv("csv/tempos_python.csv")
+    gerar_e_salvar_csv("tempos_python.csv")
