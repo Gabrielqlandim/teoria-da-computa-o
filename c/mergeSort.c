@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+extern int numeros[10000];
 
 int vetor_fixo[100] = {
     5732, 9881, 4769, 1045, 8302, 2119, 6450, 3847, 9023, 7521,
@@ -151,9 +152,9 @@ void mergeSort(int inicio, int fim, int v[], int tam){
 }
 
 void executar(int tam, int caso, FILE *f){
-    double tempos_execucao[1000];
+    double tempos_execucao[30]; // Ajuste aqui para 15 ou 30 execuções se quiser
 
-    for(int j=0; j<1000; j++){
+    for(int j=0; j<30; j++){ // Ajuste o número de execuções!
         int v[tam];
         clock_t inicio, fim;
         double tempo;
@@ -163,11 +164,10 @@ void executar(int tam, int caso, FILE *f){
                 v[i] = i;
             }
             else if (caso == 2){
-                /*int min = 1;
-                int max = tam;
-                v[i] = min + rand() % (max - min + 1);*/
-
-                v[i] = vetor_fixo2[i];
+                if (tam == 1000)
+                    v[i] = vetor_fixo2[i];
+                else if (tam == 10000)
+                    v[i] = numeros[i]; // Agora usa o vetor do dezMil.c!
             }
             else if (caso == 3){
                 v[i] = tam - i;
@@ -187,7 +187,7 @@ void executar(int tam, int caso, FILE *f){
     else if (caso == 2) nome_caso = "Caso medio";
     else nome_caso = "Pior";
 
-    for(int i=0; i<1000; i++){
+    for(int i=0; i<30; i++){
         fprintf(f, "%s,%d,%d,%.9f\n", nome_caso, tam, i+1, tempos_execucao[i]);
     }
 }
