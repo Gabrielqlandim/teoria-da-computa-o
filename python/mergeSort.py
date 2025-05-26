@@ -44,7 +44,7 @@ def gerar_e_salvar_csv(nome_arquivo):
         "Pior": lambda tam: list(range(tam, 0, -1))
     }
 
-    tamanhos = [100, 10000, 100000]
+    tamanhos = [1000, 10000, 100000]
 
     with open(nome_arquivo, mode='w', newline='') as arquivo_csv:
         escritor = csv.writer(arquivo_csv)

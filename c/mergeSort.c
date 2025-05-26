@@ -81,9 +81,9 @@ int main(void){
 
     fprintf(f, "Caso,Tamanho,Execucao,Tempo\n");
 
-    executar(100, 1, f);
-    executar(100, 2, f);
-    executar(100, 3, f);
+    executar(1000, 1, f);
+    executar(1000, 2, f);
+    executar(1000, 3, f);
 
     
     executar(10000, 1, f);
